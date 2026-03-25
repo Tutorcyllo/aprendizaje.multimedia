@@ -3,13 +3,6 @@
 **EduMed UVa · Unidad de Educación Médica · Facultad de Medicina · Universidad de Valladolid · 2025**
 
 > *Cómo enseñar respetando cómo aprende el cerebro.*
-
----
-
-## 🌐 Demo en vivo
-
-👉 [tutorcyllo.github.io/aprendizaje-multimedia-2025](https://tutorcyllo.github.io/aprendizaje-multimedia-2025/) *(actualiza con la URL real)*
-
 ---
 
 ## 📋 Descripción
