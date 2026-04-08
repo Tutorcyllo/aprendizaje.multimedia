@@ -42,12 +42,14 @@ header{background:var(--yellow);border-bottom:2px solid var(--yellow-deep);posit
 .hero-text{flex:1;min-width:0}
 .hero-img-wrap{flex-shrink:0}
 .hero-img{width:260px;height:auto;object-fit:contain;border-radius:12px;filter:drop-shadow(0 4px 16px rgba(0,0,0,.18))}
+@media(max-width:1024px){.hero-img{width:200px}}
+@media(max-width:768px){.hero-img{width:60%;display:block;margin:0 auto}}
 .hero-headline{font-size:1.6rem;font-weight:800;color:var(--gray-900);line-height:1.15;letter-spacing:-.5px;margin-bottom:6px}
 .hero-sub{font-size:.875rem;color:var(--gray-700);font-weight:500;margin-bottom:16px;max-width:640px}
 .hero-stats{display:flex;gap:8px;flex-wrap:wrap}
 .stat-pill{background:var(--gray-900);color:var(--yellow);font-size:.72rem;font-weight:700;padding:5px 14px;border-radius:100px;letter-spacing:.03em}
 
-/* TABS */
+/* MAIN TABS */
 .tabs-wrap{max-width:1280px;margin:0 auto;padding:24px 36px 0}
 .tabs{display:flex;gap:4px;background:var(--white);border:1.5px solid var(--gray-200);border-radius:12px;padding:5px;width:fit-content;margin-bottom:24px;box-shadow:var(--shadow-sm);flex-wrap:wrap}
 .tab{font-family:'Figtree',sans-serif;font-size:.82rem;font-weight:700;padding:9px 18px;border-radius:8px;border:none;cursor:pointer;background:transparent;color:var(--gray-500);transition:all .15s;white-space:nowrap}
@@ -88,6 +90,25 @@ main{max-width:1280px;margin:0 auto;padding:0 36px 80px}
 
 /* TWO-COL */
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+
+/* CARGA COGNITIVA — PESTAÑAS TIPO CARPETA */
+.carga-box{margin:16px 0 10px}
+.carga-tabs-row{display:flex;gap:0;flex-wrap:wrap}
+.ctab{font-family:'Figtree',sans-serif;font-size:.8rem;font-weight:700;padding:9px 18px;border:1.5px solid var(--gray-200);border-bottom:none;border-radius:8px 8px 0 0;cursor:pointer;background:var(--gray-100);color:var(--gray-500);transition:all .15s;white-space:nowrap;position:relative;top:1px;z-index:0}
+.ctab:hover{background:var(--gray-50);color:var(--gray-900)}
+.ctab.ctab-active{background:var(--white);color:var(--gray-900);border-color:var(--gray-200);z-index:2;font-weight:800}
+.carga-panel-wrap{background:var(--white);border:1.5px solid var(--gray-200);border-radius:0 8px 8px 8px;padding:20px;position:relative;z-index:1;min-height:160px}
+.cpanel{display:none}
+.cpanel.cpanel-active{display:block;animation:cfade .2s ease}
+@keyframes cfade{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:translateY(0)}}
+.cpanel-icon{font-size:1.8rem;margin-bottom:6px}
+.cpanel-name{font-size:.95rem;font-weight:800;color:var(--gray-900);margin-bottom:6px}
+.cbadge{display:inline-block;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:100px;margin-bottom:12px;letter-spacing:.04em;text-transform:uppercase}
+.cbadge-neutral{background:var(--gray-200);color:var(--gray-700)}
+.cbadge-bad{background:#FEE2E2;color:#B91C1C}
+.cbadge-good{background:#DCFCE7;color:#15803D}
+.cpanel p{font-size:.875rem;color:var(--gray-700);line-height:1.65;margin-bottom:10px}
+.cpanel p:last-child{margin-bottom:0}
 
 /* ACCORDION */
 .accordion{border:1.5px solid var(--gray-200);border-radius:var(--radius);margin-bottom:10px;overflow:hidden;background:var(--white);box-shadow:var(--shadow-sm)}
@@ -186,15 +207,11 @@ footer a{color:var(--gray-700);text-decoration:none}
 footer a:hover{text-decoration:underline}
 
 /* RESPONSIVE */
-@media(max-width:1024px){
-  .valid-grid{grid-template-columns:repeat(2,1fr)}
-  .hero-img{width:200px}
-}
+@media(max-width:1024px){.valid-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:768px){
   .header-inner{padding:0 16px;height:60px}
   .hero{padding:20px 16px}
   .hero-inner{flex-direction:column;align-items:flex-start;gap:16px}
-  .hero-img{width:60%;display:block;margin:0 auto}
   .hero-headline{font-size:1.2rem}
   .tabs-wrap{padding:16px 16px 0}
   .tabs{width:100%}
@@ -202,6 +219,8 @@ footer a:hover{text-decoration:underline}
   main{padding:0 16px 60px}
   .two-col,.compare,.principe-grid{grid-template-columns:1fr}
   .valid-grid{grid-template-columns:1fr}
+  .carga-tabs-row{flex-direction:row}
+  .ctab{font-size:.72rem;padding:7px 10px;flex:1;text-align:center}
 }
 </style>
 </head>
@@ -213,8 +232,7 @@ footer a:hover{text-decoration:underline}
     <a class="header-brand" href="https://tutorcyllo.github.io/EduMed.UVa/" target="_blank">
       <img class="header-logo"
         src="https://raw.githubusercontent.com/Tutorcyllo/EduMed.UVa/main/img/logo_facultad.png"
-        alt="Facultad de Medicina UVa"
-        onerror="this.style.display='none'">
+        alt="Facultad de Medicina UVa" onerror="this.style.display='none'">
       <div>
         <div class="header-title">EduMed UVa</div>
         <div class="header-subtitle">Unidad de Educación Médica · Facultad de Medicina</div>
@@ -241,13 +259,12 @@ footer a:hover{text-decoration:underline}
     <div class="hero-img-wrap">
       <img class="hero-img"
         src="https://raw.githubusercontent.com/Tutorcyllo/EduMed.UVa/main/img/medicina_innova2026.png"
-        alt="Innovando en educación médica"
-        onerror="this.style.display='none'">
+        alt="Innovando en educación médica" onerror="this.style.display='none'">
     </div>
   </div>
 </div>
 
-<!-- TABS -->
+<!-- MAIN TABS -->
 <div class="tabs-wrap">
   <div class="tabs">
     <button class="tab active" onclick="switchTab('tab1',this)">🧠 Fundamento teórico</button>
@@ -264,20 +281,13 @@ footer a:hover{text-decoration:underline}
 <!-- ══ TAB 1 ══ -->
 <div id="panel-tab1" class="panel active">
 
-  <!-- VÍDEO INTRO -->
   <div class="video-card">
-    <div class="video-card-label">
-      ▶ Introducción <span>· Avatar EduMed · &lt;1 min</span>
-      <button class="video-toggle" onclick="toggleVideo(this)">Ver vídeo</button>
-    </div>
-    <div class="video-wrap">
-      <iframe src="https://www.youtube.com/embed/PzslgyQzoKk" allowfullscreen loading="lazy"></iframe>
-    </div>
+    <div class="video-card-label">▶ Introducción <span>· Avatar EduMed · &lt;1 min</span>
+      <button class="video-toggle" onclick="toggleVideo(this)">Ver vídeo</button></div>
+    <div class="video-wrap"><iframe src="https://www.youtube.com/embed/PzslgyQzoKk" allowfullscreen loading="lazy"></iframe></div>
   </div>
 
-  <div class="quote-simple">
-    ¿Te parece que los estudiantes simplemente no "enganchan" con tus clases? Antes de pensar que la generación Z está perdida, pregúntate si enseñamos como realmente aprende el cerebro.
-  </div>
+  <div class="quote-simple">¿Te parece que los estudiantes simplemente no "enganchan" con tus clases? Antes de pensar que la generación Z está perdida, pregúntate si enseñamos como realmente aprende el cerebro.</div>
 
   <div class="card">
     <div class="card-title">🎯 La teoría de Richard E. Mayer</div>
@@ -308,57 +318,49 @@ footer a:hover{text-decoration:underline}
   <div class="card">
     <div class="card-title">🧠 Capacidad limitada de la memoria de trabajo · Teoría de la carga cognitiva (Sweller)</div>
     <div class="card-body">
-      <p>Detrás del segundo supuesto de Mayer está la <strong>teoría de la carga cognitiva de John Sweller</strong> (1988), uno de los marcos teóricos más influyentes en el diseño instruccional de las últimas décadas.</p>
-      <p>La idea central es simple pero con consecuencias enormes para quien diseña material docente: <strong>la memoria de trabajo —donde ocurre el aprendizaje— tiene una capacidad muy limitada</strong>. Solo puede manejar aproximadamente 4–7 elementos de información a la vez. Si la superamos, el aprendizaje se bloquea. No es que el alumno no quiera aprender: es que su sistema cognitivo está saturado.</p>
+      <p>Detrás del segundo supuesto de Mayer está la <strong>teoría de la carga cognitiva de John Sweller</strong> (1988), uno de los marcos teóricos más influyentes en el diseño instruccional. La idea central: <strong>la memoria de trabajo solo puede manejar aproximadamente 4–7 elementos a la vez</strong>. Si la superamos, el aprendizaje se bloquea.</p>
       <p>Sweller distingue tres tipos de carga que compiten por ese espacio limitado:</p>
-      <div class="valid-grid">
-        <div class="valid-item">
-          <div class="valid-icon">📚</div>
-          <div class="valid-title">Carga intrínseca</div>
-          <div class="valid-desc">Inherente a la complejidad del contenido. No es alterable. Depende de cuántos elementos hay que manejar simultáneamente y de cómo se relacionan entre sí (<em>element interactivity</em>).</div>
-        </div>
-        <div class="valid-item">
-          <div class="valid-icon">🔇</div>
-          <div class="valid-title">Carga extrínseca</div>
-          <div class="valid-desc">Generada por el <em>diseño</em> del material, no por el contenido. Es la carga que podemos —y debemos— eliminar. No contribuye al aprendizaje: lo obstaculiza.</div>
-        </div>
-        <div class="valid-item">
-          <div class="valid-icon">✅</div>
-          <div class="valid-title">Carga pertinente</div>
-          <div class="valid-desc">La carga "buena": la que el alumno invierte en construir esquemas mentales duraderos. Debe fomentarse activamente. Es la que genera aprendizaje real y transferible.</div>
-        </div>
-      </div>
 
-      <div class="note" style="margin-top:16px"><strong>La metáfora útil:</strong> imagina que la memoria de trabajo es una mesa de trabajo pequeña. La carga intrínseca son los libros que necesitas consultar sí o sí. La extrínseca son los papeles desordenados, el café derramado y el móvil encima de la mesa: no aportan nada pero ocupan espacio. La pertinente es el trabajo real que haces en esa mesa. Nuestro objetivo como docentes: despejar la mesa de todo lo innecesario para que el alumno pueda trabajar de verdad.</div>
-
-      <p style="margin-top:14px;font-weight:600;color:var(--gray-900)">¿Qué significa esto en la práctica clínica docente?</p>
-      <p>En medicina, la carga intrínseca ya es muy alta por naturaleza. Cuando un estudiante de 3.º intenta interpretar un ECG por primera vez, su memoria de trabajo está gestionando simultáneamente: la anatomía del sistema de conducción, los ejes, la frecuencia, el ritmo, los intervalos y la morfología de cada onda. No podemos reducir esa complejidad —es la materia misma. Lo que sí podemos hacer es no añadir carga extrínseca encima.</p>
-
-      <div class="steps">
-        <div class="step">
-          <div class="step-num">⚠️</div>
-          <div class="step-content">
-            <h4>Ejemplo de carga extrínseca evitable</h4>
-            <p>Una diapositiva con el trazado del ECG en una esquina, la leyenda de las derivaciones al pie, el texto explicativo en el centro y el docente leyendo en voz alta ese mismo texto. El alumno gasta su limitada memoria de trabajo en <em>encontrar</em> la información, no en <em>procesarla</em>. Resultado: sensación de haber "visto mucho" sin haber aprendido nada sólido.</p>
+      <!-- PESTAÑAS TIPO CARPETA -->
+      <div class="carga-box">
+        <div class="carga-tabs-row">
+          <button class="ctab ctab-active" onclick="switchCarga('ci',this)">📚 Intrínseca</button>
+          <button class="ctab" onclick="switchCarga('ce',this)">🔇 Extrínseca</button>
+          <button class="ctab" onclick="switchCarga('cp',this)">✅ Pertinente</button>
+        </div>
+        <div class="carga-panel-wrap">
+          <div id="cpanel-ci" class="cpanel cpanel-active">
+            <div class="cpanel-icon">📚</div>
+            <div class="cpanel-name">Carga intrínseca</div>
+            <span class="cbadge cbadge-neutral">No alterable</span>
+            <p>Inherente a la complejidad del propio contenido. Depende de cuántos elementos hay que manejar simultáneamente y de cómo se relacionan entre sí (<em>element interactivity</em>). En medicina, esta carga es siempre alta: un estudiante que interpreta un ECG gestiona a la vez la anatomía del sistema de conducción, los ejes, la frecuencia, los intervalos y la morfología de cada onda.</p>
+            <p>Como docentes, <strong>no podemos reducirla</strong> — es la materia misma. Lo que sí podemos hacer es no añadir más carga encima.</p>
           </div>
-        </div>
-        <div class="step">
-          <div class="step-num">✅</div>
-          <div class="step-content">
-            <h4>La misma clase con carga extrínseca reducida</h4>
-            <p>El trazado ocupa toda la pantalla. Las etiquetas están junto a cada onda (contigüidad espacial). El docente narra en voz alta mientras señala (modalidad + encarnación). No hay texto en pantalla que compita con la narración. La memoria de trabajo del alumno se libera para lo que importa: construir el esquema de interpretación.</p>
+          <div id="cpanel-ce" class="cpanel">
+            <div class="cpanel-icon">🔇</div>
+            <div class="cpanel-name">Carga extrínseca</div>
+            <span class="cbadge cbadge-bad">Debe reducirse al máximo</span>
+            <p>Generada por el <strong>diseño del material</strong>, no por el contenido. Es ruido: diapositivas llenas de texto que el profesor lee en voz alta, gráficos con la leyenda al otro extremo, animaciones decorativas, música de fondo. No contribuye al aprendizaje — lo <strong>obstaculiza</strong> activamente.</p>
+            <p>Es la única carga que podemos — y debemos — eliminar. Cada decisión de diseño que reduce la carga extrínseca libera capacidad en la memoria de trabajo para lo que realmente importa.</p>
           </div>
-        </div>
-        <div class="step">
-          <div class="step-num">🏗️</div>
-          <div class="step-content">
-            <h4>Cómo fomentar la carga pertinente</h4>
-            <p>Tras la explicación, pide al alumno que interprete un segundo trazado sin guía, que explique a un compañero qué ha visto o que genere una regla nemotécnica propia. Ese esfuerzo cognitivo —incómodo, a veces frustrante— es precisamente el que construye esquemas mentales duraderos. Es la diferencia entre reconocer y saber.</p>
+          <div id="cpanel-cp" class="cpanel">
+            <div class="cpanel-icon">✅</div>
+            <div class="cpanel-name">Carga pertinente</div>
+            <span class="cbadge cbadge-good">Debe fomentarse</span>
+            <p>La carga "buena": la que el alumno invierte en <strong>construir esquemas mentales duraderos</strong>. Ocurre cuando selecciona, organiza e integra la información de forma activa. Es el esfuerzo cognitivo que genera aprendizaje real y transferible.</p>
+            <p>Se fomenta con actividades generativas: pedir al alumno que resuma, que explique a otro, que dibuje el mecanismo sin mirar los apuntes. Ese esfuerzo incómodo es el que deja huella en la memoria a largo plazo.</p>
           </div>
         </div>
       </div>
 
-      <div class="note"><strong>Un dato que sorprende:</strong> Sweller demostró que, para estudiantes <em>novatos</em>, los ejemplos resueltos (<em>worked examples</em>) son más efectivos que los problemas para resolver. La razón es la carga cognitiva: el novato aún no tiene esquemas, así que resolver un problema desde cero satura su memoria de trabajo sin generar aprendizaje eficiente. Primero se aprende <em>viendo cómo se hace</em>; después, haciendo. Este principio es directamente aplicable a la enseñanza del razonamiento clínico.</div>
+      <div class="note"><strong>La metáfora útil:</strong> imagina que la memoria de trabajo es una mesa pequeña. La carga intrínseca son los libros que necesitas consultar sí o sí. La extrínseca son los papeles desordenados y el móvil encima: no aportan nada pero ocupan espacio. La pertinente es el trabajo real que haces en esa mesa. Nuestro objetivo: despejar la mesa de todo lo innecesario.</div>
+
+      <div class="steps" style="margin-top:14px">
+        <div class="step"><div class="step-num">⚠️</div><div class="step-content"><h4>Ejemplo de carga extrínseca evitable</h4><p>Diapositiva con el trazado ECG en una esquina, la leyenda al pie, el texto en el centro y el docente leyendo ese texto en voz alta. El alumno gasta su memoria de trabajo en <em>encontrar</em> la información, no en <em>procesarla</em>.</p></div></div>
+        <div class="step"><div class="step-num">✅</div><div class="step-content"><h4>La misma clase con carga extrínseca reducida</h4><p>El trazado ocupa toda la pantalla. Las etiquetas están junto a cada onda. El docente narra mientras señala. No hay texto en pantalla que compita con la narración. La memoria de trabajo queda libre para construir el esquema de interpretación.</p></div></div>
+        <div class="step"><div class="step-num">🏗️</div><div class="step-content"><h4>Cómo fomentar la carga pertinente</h4><p>Tras la explicación, pide al alumno que interprete un segundo trazado sin guía, que explique a un compañero qué ha visto o que genere una regla nemotécnica propia. Ese esfuerzo es precisamente el que construye esquemas mentales duraderos.</p></div></div>
+      </div>
+      <div class="note"><strong>Un dato que sorprende:</strong> Sweller demostró que para estudiantes novatos los ejemplos resueltos (<em>worked examples</em>) son más efectivos que los problemas para resolver. El novato aún no tiene esquemas, así que resolver desde cero satura su memoria de trabajo sin generar aprendizaje eficiente. Primero se aprende <em>viendo cómo se hace</em>; después, haciendo.</div>
     </div>
   </div>
 
@@ -398,15 +400,10 @@ footer a:hover{text-decoration:underline}
     </div>
   </div>
 
-  <!-- VÍDEO CIERRE -->
   <div class="video-card">
-    <div class="video-card-label">
-      ▶ Cierre de sección <span>· Avatar EduMed · &lt;1 min</span>
-      <button class="video-toggle" onclick="toggleVideo(this)">Ver vídeo</button>
-    </div>
-    <div class="video-wrap">
-      <iframe src="https://www.youtube.com/embed/KvS9Itzcysc" allowfullscreen loading="lazy"></iframe>
-    </div>
+    <div class="video-card-label">▶ Cierre de sección <span>· Avatar EduMed · &lt;1 min</span>
+      <button class="video-toggle" onclick="toggleVideo(this)">Ver vídeo</button></div>
+    <div class="video-wrap"><iframe src="https://www.youtube.com/embed/KvS9Itzcysc" allowfullscreen loading="lazy"></iframe></div>
   </div>
 
 </div>
@@ -414,15 +411,10 @@ footer a:hover{text-decoration:underline}
 <!-- ══ TAB 2 ══ -->
 <div id="panel-tab2" class="panel">
 
-  <!-- VÍDEO INTRO -->
   <div class="video-card">
-    <div class="video-card-label">
-      ▶ Introducción <span>· Avatar EduMed · &lt;1 min</span>
-      <button class="video-toggle" onclick="toggleVideo(this)">Ver vídeo</button>
-    </div>
-    <div class="video-wrap">
-      <iframe src="https://www.youtube.com/embed/wh3R1evky-E" allowfullscreen loading="lazy"></iframe>
-    </div>
+    <div class="video-card-label">▶ Introducción <span>· Avatar EduMed · &lt;1 min</span>
+      <button class="video-toggle" onclick="toggleVideo(this)">Ver vídeo</button></div>
+    <div class="video-wrap"><iframe src="https://www.youtube.com/embed/wh3R1evky-E" allowfullscreen loading="lazy"></iframe></div>
   </div>
 
   <div class="card">
@@ -474,7 +466,7 @@ footer a:hover{text-decoration:underline}
     <div class="acc-header" onclick="toggleAcc(this)"><span class="acc-num">4</span><span>Señalización</span><span class="acc-arrow">▼</span></div>
     <div class="acc-body">
       <div class="principe-grid">
-        <div class="principe-left"><h4>En la práctica</h4><p>Ayuda al alumno a enfocar la atención. Destaca lo importante con flechas, colores, estructuras claras. Dirige sobre qué debe mirar, qué recordar, qué conecta con qué. <strong>Eso también es enseñar.</strong></p></div>
+        <div class="principe-left"><h4>En la práctica</h4><p>Ayuda al alumno a enfocar la atención. Destaca lo importante con flechas, colores, estructuras claras. <strong>Eso también es enseñar.</strong></p></div>
         <div class="principe-right"><h4>Cómo aplicarlo</h4><ul><li>Flechas, recuadros y colores para lo esencial</li><li>Palabras clave en negrita o subrayadas</li><li>Enumera los pasos del proceso</li><li>Señales verbales: <em>"lo más importante es…"</em></li></ul></div>
       </div>
     </div>
@@ -484,10 +476,10 @@ footer a:hover{text-decoration:underline}
     <div class="acc-header" onclick="toggleAcc(this)"><span class="acc-num">5</span><span>Coherencia</span><span class="acc-arrow">▼</span></div>
     <div class="acc-body">
       <div class="principe-grid">
-        <div class="principe-left"><h4>En la práctica</h4><p>¿Esa anécdota que pensaste meter, aporta algo esencial? Si no, sácala. Evita música de fondo, adornos innecesarios, animaciones distractoras. <strong>Cuanto más limpio y directo el diseño, mejor aprende tu estudiante.</strong></p></div>
+        <div class="principe-left"><h4>En la práctica</h4><p>¿Esa anécdota que pensaste meter, aporta algo esencial? Si no, sácala. <strong>Cuanto más limpio y directo el diseño, mejor aprende tu estudiante.</strong></p></div>
         <div class="principe-right"><h4>Cómo aplicarlo</h4><ul><li>Elimina contenido irrelevante (texto, imágenes, audio)</li><li>Diseño visual limpio y enfocado</li><li>Evita efectos de entrada/salida en diapositivas</li><li>Menos es más</li></ul></div>
       </div>
-      <div class="note"><strong>Matiz:</strong> Las anécdotas bien utilizadas, de forma moderada y justo <em>antes</em> de la explicación principal, pueden ayudar a enganchar la atención. El problema es usarlas en mitad de la explicación o abusar de ellas.</div>
+      <div class="note"><strong>Matiz:</strong> Las anécdotas bien utilizadas, de forma moderada y justo <em>antes</em> de la explicación principal, pueden ayudar a enganchar la atención.</div>
     </div>
   </div>
 
@@ -507,10 +499,10 @@ footer a:hover{text-decoration:underline}
     <div class="acc-header" onclick="toggleAcc(this)"><span class="acc-num">7</span><span>Entrenamiento previo (pre-entrenamiento)</span><span class="acc-arrow">▼</span></div>
     <div class="acc-body">
       <div class="principe-grid">
-        <div class="principe-left"><h4>En la práctica</h4><p>No lances conceptos nuevos como si todos los alumnos vinieran ya con el contexto aprendido. Primero los términos clave y esquemas básicos; después el proceso complejo. <strong>Esto no es infantilizar. Es enseñar bien.</strong></p></div>
+        <div class="principe-left"><h4>En la práctica</h4><p>No lances conceptos nuevos como si todos los alumnos vinieran ya con el contexto aprendido. Primero los términos clave y esquemas básicos; después el proceso complejo. <strong>No es infantilizar. Es enseñar bien.</strong></p></div>
         <div class="principe-right"><h4>Cómo aplicarlo</h4><ul><li>Introduce conceptos y estructuras clave antes del contenido complejo</li><li>Presenta el vocabulario necesario al inicio</li><li>Ofrece un mapa o modelo mental básico</li><li>Ejemplo: repasar el sistema de conducción antes de explicar el ECG</li></ul></div>
       </div>
-      <div class="note"><strong>Referencia histórica:</strong> Para los que ya entran en la edad de ser <em>vintage</em>: así explicaba el <em>Manual de Patología General de Sisinio de Castro</em> la fisiopatología. Este principio no es nuevo.</div>
+      <div class="note"><strong>Referencia histórica:</strong> Así explicaba el <em>Manual de Patología General de Sisinio de Castro</em> la fisiopatología. Este principio no es nuevo.</div>
     </div>
   </div>
 
@@ -521,7 +513,7 @@ footer a:hover{text-decoration:underline}
         <div class="principe-left"><h4>En la práctica</h4><p>¿Explicas con texto en pantalla mientras el alumno lee y tú hablas al mismo tiempo? Mala idea. Mejor: <strong>narración (voz) + gráficos</strong>. No pongas los canales a competir. Hazlos colaborar.</p></div>
         <div class="principe-right"><h4>Cómo aplicarlo</h4><ul><li>NARRACIÓN + GRÁFICOS, no TEXTO + GRÁFICOS</li><li>Presenta las explicaciones mediante voz mientras muestras imágenes</li><li>El alumno no puede leer y escuchar lo mismo simultáneamente</li></ul></div>
       </div>
-      <div class="note"><strong>Para reflexionar:</strong> ¿Imagináis la famosa charla de Ken Robinson llena de diapositivas con texto, leyendo todo el rato en vez de asistir fascinados a su forma de contarlo? Hubiera sido una pérdida.</div>
+      <div class="note"><strong>Para reflexionar:</strong> ¿Imagináis la famosa charla de Ken Robinson llena de diapositivas con texto, leyendo todo el rato? Hubiera sido una pérdida.</div>
     </div>
   </div>
 
@@ -564,7 +556,7 @@ footer a:hover{text-decoration:underline}
         <div class="principe-left"><h4>En la práctica</h4><p>¿Quieres que el alumno preste atención? Usa gestos. Señala. Activa la pantalla. Haz que tu presencia tenga <strong>intención didáctica</strong>. Un tono positivo y alentador aumenta la motivación.</p></div>
         <div class="principe-right"><h4>Cómo aplicarlo</h4><ul><li>Señales "humanas": gestos, punteros, señalar con la mano</li><li>Estilo conversacional ("vamos a ver…", "observa cómo…")</li><li>Avatares o personajes animados en píldoras docentes</li><li>No necesitas ser un actor: solo estar presente con propósito</li></ul></div>
       </div>
-      <div class="note"><strong>Principio del punto de vista:</strong> En vídeos de habilidades manuales (dar un punto, exploración física), grabar en <strong>primera persona</strong> es más efectivo que grabar de frente. Las antiguas clases de anatomía con pizarra y tiza ya tenían este principio en cuenta.</div>
+      <div class="note"><strong>Principio del punto de vista:</strong> En vídeos de habilidades manuales, grabar en <strong>primera persona</strong> es más efectivo que grabar de frente. Las antiguas clases de anatomía con pizarra y tiza ya tenían este principio en cuenta.</div>
     </div>
   </div>
 
@@ -578,19 +570,12 @@ footer a:hover{text-decoration:underline}
     </div>
   </div>
 
-  <div class="quote-simple">
-    Enseñar no es repetir lo que sabemos. Es diseñar situaciones que hagan posible que el otro aprenda. Y eso no pasa solo porque "explicamos bien", sino porque respetamos cómo funciona el cerebro humano al aprender.
-  </div>
+  <div class="quote-simple">Enseñar no es repetir lo que sabemos. Es diseñar situaciones que hagan posible que el otro aprenda. Y eso no pasa solo porque "explicamos bien", sino porque respetamos cómo funciona el cerebro humano al aprender.</div>
 
-  <!-- VÍDEO CIERRE -->
   <div class="video-card">
-    <div class="video-card-label">
-      ▶ Cierre de sección <span>· Avatar EduMed · &lt;1 min</span>
-      <button class="video-toggle" onclick="toggleVideo(this)">Ver vídeo</button>
-    </div>
-    <div class="video-wrap">
-      <iframe src="https://www.youtube.com/embed/EWfFAAjMRo8" allowfullscreen loading="lazy"></iframe>
-    </div>
+    <div class="video-card-label">▶ Cierre de sección <span>· Avatar EduMed · &lt;1 min</span>
+      <button class="video-toggle" onclick="toggleVideo(this)">Ver vídeo</button></div>
+    <div class="video-wrap"><iframe src="https://www.youtube.com/embed/EWfFAAjMRo8" allowfullscreen loading="lazy"></iframe></div>
   </div>
 
 </div>
@@ -598,15 +583,10 @@ footer a:hover{text-decoration:underline}
 <!-- ══ TAB 3 ══ -->
 <div id="panel-tab3" class="panel">
 
-  <!-- VÍDEO INTRO -->
   <div class="video-card">
-    <div class="video-card-label">
-      ▶ Introducción <span>· Avatar EduMed · &lt;1 min</span>
-      <button class="video-toggle" onclick="toggleVideo(this)">Ver vídeo</button>
-    </div>
-    <div class="video-wrap">
-      <iframe src="https://www.youtube.com/embed/LmmY0QkByVI" allowfullscreen loading="lazy"></iframe>
-    </div>
+    <div class="video-card-label">▶ Introducción <span>· Avatar EduMed · &lt;1 min</span>
+      <button class="video-toggle" onclick="toggleVideo(this)">Ver vídeo</button></div>
+    <div class="video-wrap"><iframe src="https://www.youtube.com/embed/LmmY0QkByVI" allowfullscreen loading="lazy"></iframe></div>
   </div>
 
   <div class="card">
@@ -626,46 +606,14 @@ footer a:hover{text-decoration:underline}
     <div class="card-body">
       <p>¿Por qué funcionan tan bien entre los más jóvenes? Porque están <strong>alineados con los principios de la teoría del aprendizaje multimedia</strong>. Y nuestros materiales docentes, muchas veces, no.</p>
       <p>No es magia ni adicción a las pantallas. Es neurociencia cognitiva aplicada, casi siempre de forma intuitiva por quienes diseñan estos formatos. Veámoslo principio a principio, con ejemplos del contexto médico:</p>
-
       <div class="steps">
-        <div class="step">
-          <div class="step-num">1</div>
-          <div class="step-content">
-            <h4>Segmentación <span class="tag">Principio</span></h4>
-            <p>Un microvídeo aborda <em>una sola idea</em>. No la fisiopatología completa del shock, sino qué es el shock distributivo y por qué se produce vasodilatación. Eso es todo. La memoria de trabajo no colapsa porque nunca se le exige procesar más de lo que puede manejar a la vez. Comparémoslo con la clase magistral tradicional de dos horas sobre "estados de shock": el alumno llega al minuto 40 con la memoria de trabajo saturada y el resto entra sin procesarse. El microvídeo hace exactamente lo que Sweller recomendaría: divide la carga intrínseca en porciones manejables y deja al estudiante controlar el ritmo — puede pausar, repetir, avanzar.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">2</div>
-          <div class="step-content">
-            <h4>Modalidad <span class="tag">Principio</span></h4>
-            <p>Un buen microvídeo muestra una imagen, un esquema o una animación mientras una voz narra la explicación. Canal visual y canal auditivo trabajando en paralelo, cada uno aportando información diferente. Esto distribuye la carga cognitiva entre los dos sistemas y maximiza la capacidad total de procesamiento. Compáralo con una diapositiva llena de texto que el docente lee en voz alta: ambos canales reciben el mismo mensaje, se duplica el esfuerzo y se satura la memoria de trabajo sin añadir comprensión. El microvídeo bien diseñado nunca comete ese error — no tiene espacio para hacerlo.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">3</div>
-          <div class="step-content">
-            <h4>Coherencia <span class="tag">Principio</span></h4>
-            <p>La restricción de duración actúa como filtro de calidad involuntario. Con 60 segundos, no hay espacio para la anécdota que no viene al caso, para la introducción de tres minutos, para el "antes de empezar os cuento…". Solo lo esencial. Esa obligación de síntesis radical es, paradójicamente, una ventaja pedagógica: obliga al creador a decidir qué es verdaderamente importante y eliminar todo lo demás. El principio de coherencia de Mayer —elimina lo irrelevante aunque sea interesante— se cumple por pura necesidad de formato. En educación médica esto tiene una traducción directa: un microvídeo sobre la interpretación del intervalo QT no puede permitirse explicar la historia del electrocardiograma. Va al grano porque no le queda más remedio.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">4</div>
-          <div class="step-content">
-            <h4>Contigüidad temporal <span class="tag">Principio</span></h4>
-            <p>En un microvídeo bien construido, la narración y la imagen aparecen sincronizadas: cuando la voz dice "el ventrículo izquierdo se contrae", en pantalla se ve exactamente eso ocurriendo. No hay desfase. La mente no tiene que hacer el esfuerzo de recordar lo que vio hace 15 segundos para asociarlo con lo que está escuchando ahora. Ese esfuerzo de asociación retardada, aparentemente pequeño, consume memoria de trabajo y reduce la capacidad disponible para el aprendizaje real. La sincronía no es un detalle estético: es una decisión pedagógica con impacto medible en la comprensión.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">5</div>
-          <div class="step-content">
-            <h4>Señalización y encarnación <span class="tag">Principio</span></h4>
-            <p>Los mejores microvideos médicos usan flechas, subrayados o zoom para dirigir la atención exactamente donde debe estar — sobre el hallazgo en la radiografía, sobre el segmento del trazado ECG, sobre la zona de la exploración física. Eso es señalización pura: reducir la carga extrínseca diciéndole al alumno dónde mirar. Y cuando aparece un presentador o un avatar que gesticula y señala, se activa además el principio de encarnación: la presencia humana facilita el procesamiento y genera la conexión social que mantiene la atención. No es casualidad que los microvideos más efectivos en educación médica combinen ambos elementos.</p>
-          </div>
-        </div>
+        <div class="step"><div class="step-num">1</div><div class="step-content"><h4>Segmentación <span class="tag">Principio</span></h4><p>Un microvídeo aborda <em>una sola idea</em>. No la fisiopatología completa del shock, sino qué es el shock distributivo y por qué se produce vasodilatación. La memoria de trabajo no colapsa porque nunca se le exige procesar más de lo que puede manejar. El alumno puede pausar, repetir, avanzar.</p></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-content"><h4>Modalidad <span class="tag">Principio</span></h4><p>Canal visual y canal auditivo trabajando en paralelo, cada uno aportando información diferente. Compáralo con una diapositiva llena de texto que el docente lee en voz alta: ambos canales reciben el mismo mensaje, se duplica el esfuerzo y se satura la memoria de trabajo sin añadir comprensión.</p></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-content"><h4>Coherencia <span class="tag">Principio</span></h4><p>La restricción de duración actúa como filtro de calidad involuntario. Con 60 segundos, no hay espacio para la anécdota que no viene al caso ni para la introducción de tres minutos. La obligación de síntesis radical es una ventaja pedagógica: obliga al creador a decidir qué es verdaderamente importante.</p></div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-content"><h4>Contigüidad temporal <span class="tag">Principio</span></h4><p>En un microvídeo bien construido, cuando la voz dice "el ventrículo izquierdo se contrae", en pantalla se ve exactamente eso ocurriendo. No hay desfase. La sincronía no es un detalle estético: es una decisión pedagógica con impacto medible en la comprensión.</p></div></div>
+        <div class="step"><div class="step-num">5</div><div class="step-content"><h4>Señalización y encarnación <span class="tag">Principio</span></h4><p>Los mejores microvideos médicos usan flechas, subrayados o zoom para dirigir la atención exactamente donde debe estar — sobre el hallazgo en la radiografía, sobre el segmento del trazado ECG. Y cuando aparece un presentador o avatar que gesticula y señala, se activa además el principio de encarnación.</p></div></div>
       </div>
-
-      <div class="note"><strong>La pregunta incómoda:</strong> si un algoritmo diseñado para maximizar el tiempo de pantalla ha terminado produciendo un formato que respeta mejor los principios del aprendizaje que muchas de nuestras clases… ¿qué nos dice eso sobre cómo hemos estado diseñando nuestro material docente durante décadas? No se trata de convertir la enseñanza médica en TikTok. Se trata de entender <em>por qué</em> funciona y aplicar esos mismos principios a nuestros propios formatos.</div>
+      <div class="note"><strong>La pregunta incómoda:</strong> si un algoritmo diseñado para maximizar el tiempo de pantalla ha terminado produciendo un formato que respeta mejor los principios del aprendizaje que muchas de nuestras clases… ¿qué nos dice eso sobre cómo hemos estado diseñando nuestro material docente durante décadas?</div>
     </div>
   </div>
 
@@ -674,35 +622,13 @@ footer a:hover{text-decoration:underline}
     <div class="card-title">🎙️ Las bases del éxito de los podcasts</div>
     <div class="card-body">
       <p>Los podcasts también funcionan en estudiantes jóvenes. Pero <strong>con matices importantes</strong>. Todo tiene que ver con el nivel de experiencia del oyente, y aquí entra en juego uno de los conceptos más contraintuitivos de la teoría de la carga cognitiva: el <strong>efecto de reversión de la experiencia</strong>.</p>
-
       <p style="margin-top:12px;font-weight:600;color:var(--gray-900)">¿Qué significa exactamente "reversión de la experiencia"?</p>
       <p>Significa que <strong>lo que ayuda a aprender a un novato puede perjudicar a un experto, y viceversa</strong>. No es que un recurso sea bueno o malo en abstracto: depende de quién lo usa y de cuánto sabe ya sobre el tema.</p>
-      <p>La razón está en la memoria de trabajo. Recuerda: tiene capacidad limitada. Un estudiante novato y un estudiante experto escuchan el mismo podcast sobre arritmias, pero lo que ocurre en su cabeza es radicalmente diferente.</p>
-
       <div class="steps">
-        <div class="step">
-          <div class="step-num">🆕</div>
-          <div class="step-content">
-            <h4>El estudiante novato: el podcast se queda corto</h4>
-            <p>Un alumno de 3.º que nunca ha estudiado arritmias escucha un podcast sobre fibrilación auricular. Oye palabras como "reentrada", "nodo AV", "respuesta ventricular irregular"… pero <strong>no tiene ningún esquema mental previo donde anclar esa información</strong>. Su memoria de trabajo intenta construir desde cero el significado de cada término mientras simultáneamente intenta seguir el hilo del relato. El resultado es que colapsa: procesa las palabras, pero no construye comprensión real. El podcast, solo, se queda corto. No porque sea un mal recurso, sino porque <strong>el canal auditivo no basta cuando no hay ninguna estructura previa</strong> sobre la que apoyarse. Necesita imágenes, esquemas, ejemplos visuales, texto de apoyo: múltiples canales que le ayuden a construir esa base desde cero.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">🏅</div>
-          <div class="step-content">
-            <h4>El estudiante experto: las imágenes le sobran</h4>
-            <p>Un residente de cardiología escucha ese mismo podcast. Cuando oye "fibrilación auricular con respuesta ventricular rápida", <strong>su cerebro activa automáticamente el esquema mental que ya tiene construido</strong>: ve el trazado, recuerda el tratamiento, conecta con casos que ha visto. Su memoria de trabajo está casi libre porque la mayor parte del procesamiento lo hacen sus esquemas previos en la memoria a largo plazo. Para él, el audio solo basta. Más aún: si añades imágenes o texto de apoyo que ya conoce, no le ayudas. Le <strong>distraes</strong>. Su sistema cognitivo tiene que procesar información que ya posee, y eso es carga extrínseca pura. Aquí está la reversión: lo que el novato necesita, al experto le estorba.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">💡</div>
-          <div class="step-content">
-            <h4>La consecuencia práctica para el diseño docente</h4>
-            <p>No diseñes un podcast y lo ofrezcas igual a todos. <strong>Adapta el recurso al momento del aprendizaje</strong>. Para estudiantes de primeros cursos o ante un tema nuevo: el podcast debe ir acompañado de material visual, infografías, esquemas o texto de apoyo. Para residentes o estudiantes avanzados repasando lo que ya dominan: el podcast solo puede ser la herramienta más eficiente que tengas. Un episodio de 15 minutos mientras van al hospital puede valer más que una hora de clase magistral.</p>
-          </div>
-        </div>
+        <div class="step"><div class="step-num">🆕</div><div class="step-content"><h4>El estudiante novato: el podcast se queda corto</h4><p>Un alumno de 3.º que nunca ha estudiado arritmias escucha un podcast sobre fibrilación auricular. Oye "reentrada", "nodo AV", "respuesta ventricular irregular"… pero no tiene ningún esquema mental previo donde anclar esa información. Su memoria de trabajo intenta construir desde cero el significado de cada término mientras sigue el hilo del relato. El resultado es que colapsa: procesa las palabras, pero no construye comprensión real.</p></div></div>
+        <div class="step"><div class="step-num">🏅</div><div class="step-content"><h4>El estudiante experto: las imágenes le sobran</h4><p>Un residente de cardiología escucha ese mismo podcast. Cuando oye "fibrilación auricular con respuesta ventricular rápida", su cerebro activa automáticamente el esquema mental que ya tiene construido: ve el trazado, recuerda el tratamiento, conecta con casos que ha visto. Para él, el audio solo basta. Más aún: si añades imágenes o texto de apoyo que ya conoce, no le ayudas. Le <strong>distraes</strong>. Aquí está la reversión.</p></div></div>
+        <div class="step"><div class="step-num">💡</div><div class="step-content"><h4>La consecuencia práctica para el diseño docente</h4><p>No diseñes un podcast y lo ofrezcas igual a todos. Para estudiantes de primeros cursos o ante un tema nuevo: el podcast debe ir acompañado de material visual, infografías o texto de apoyo. Para residentes o estudiantes avanzados repasando lo que ya dominan: el podcast solo puede ser la herramienta más eficiente que tengas.</p></div></div>
       </div>
-
       <table style="margin-top:4px">
         <tr><th></th><th>🆕 Estudiante novato</th><th>🏅 Estudiante experto</th></tr>
         <tr><td><strong>Esquemas previos</strong></td><td>Ausentes o muy débiles</td><td>Sólidos y bien organizados</td></tr>
@@ -711,8 +637,7 @@ footer a:hover{text-decoration:underline}
         <tr><td><strong>Recomendación</strong></td><td>Podcast + material visual + texto de apoyo</td><td>Podcast solo puede ser suficiente</td></tr>
         <tr><td><strong>Mejor momento de uso</strong></td><td>Primer contacto con el tema, siempre acompañado</td><td>Repaso, consolidación, camino al trabajo</td></tr>
       </table>
-
-      <div class="note" style="margin-top:14px"><strong>Un apunte sobre los podcasts co-creados:</strong> una de las aplicaciones más potentes y subestimadas es pedir a los propios estudiantes que <em>graben</em> el podcast. Explicar en voz alta obliga a organizar, simplificar y conectar ideas — exactamente los procesos cognitivos que generan aprendizaje profundo. No es solo una actividad generativa: es una de las más exigentes y eficaces que puedes proponer. Laupichler et al. (<em>Clin Teach</em>, 2025) confirmaron que la producción activa supera a la escucha pasiva en resultados de aprendizaje.</div>
+      <div class="note" style="margin-top:14px"><strong>Un apunte sobre los podcasts co-creados:</strong> pedir a los propios estudiantes que <em>graben</em> el podcast obliga a organizar, simplificar y conectar ideas — exactamente los procesos cognitivos que generan aprendizaje profundo. Laupichler et al. (<em>Clin Teach</em>, 2025) confirmaron que la producción activa supera a la escucha pasiva en resultados de aprendizaje.</div>
     </div>
   </div>
 
@@ -724,19 +649,12 @@ footer a:hover{text-decoration:underline}
     </div>
   </div>
 
-  <div class="quote-simple">
-    Microvideos y podcasts no son "modas juveniles". Son herramientas que, bien diseñadas, respetan cómo aprende el cerebro. Quizás el problema no es que los estudiantes cambien, sino que nosotros no nos adaptemos a la evidencia.
-  </div>
+  <div class="quote-simple">Microvideos y podcasts no son "modas juveniles". Son herramientas que, bien diseñadas, respetan cómo aprende el cerebro. Quizás el problema no es que los estudiantes cambien, sino que nosotros no nos adaptemos a la evidencia.</div>
 
-  <!-- VÍDEO CIERRE -->
   <div class="video-card">
-    <div class="video-card-label">
-      ▶ Cierre de sección <span>· Avatar EduMed · &lt;1 min</span>
-      <button class="video-toggle" onclick="toggleVideo(this)">Ver vídeo</button>
-    </div>
-    <div class="video-wrap">
-      <iframe src="https://www.youtube.com/embed/9EjffocbrUE" allowfullscreen loading="lazy"></iframe>
-    </div>
+    <div class="video-card-label">▶ Cierre de sección <span>· Avatar EduMed · &lt;1 min</span>
+      <button class="video-toggle" onclick="toggleVideo(this)">Ver vídeo</button></div>
+    <div class="video-wrap"><iframe src="https://www.youtube.com/embed/9EjffocbrUE" allowfullscreen loading="lazy"></iframe></div>
   </div>
 
 </div>
@@ -744,15 +662,10 @@ footer a:hover{text-decoration:underline}
 <!-- ══ TAB 4 ══ -->
 <div id="panel-tab4" class="panel">
 
-  <!-- VÍDEO INTRO -->
   <div class="video-card">
-    <div class="video-card-label">
-      ▶ Introducción <span>· Avatar EduMed · &lt;1 min</span>
-      <button class="video-toggle" onclick="toggleVideo(this)">Ver vídeo</button>
-    </div>
-    <div class="video-wrap">
-      <iframe src="https://www.youtube.com/embed/7Xxg3UGaq1c" allowfullscreen loading="lazy"></iframe>
-    </div>
+    <div class="video-card-label">▶ Introducción <span>· Avatar EduMed · &lt;1 min</span>
+      <button class="video-toggle" onclick="toggleVideo(this)">Ver vídeo</button></div>
+    <div class="video-wrap"><iframe src="https://www.youtube.com/embed/7Xxg3UGaq1c" allowfullscreen loading="lazy"></iframe></div>
   </div>
 
   <div class="card">
@@ -760,14 +673,13 @@ footer a:hover{text-decoration:underline}
     <div class="card-body">
       <p>¿Esto de las infografías no es una moda para compartir en redes o para decorar los libros? Es una pregunta legítima, y merece una respuesta seria.</p>
       <p>La infografía tiene mala prensa en ciertos contextos académicos, y en parte con razón: las redes están llenas de infografías mal diseñadas — sobrecargadas de iconos decorativos, con texto diminuto, colores sin jerarquía y mensajes que no se sostienen sin un pie de foto. Eso no es una infografía educativa. Es un póster bonito.</p>
-      <p>Pero cuando una infografía está bien construida — cuando el texto está junto a la imagen que describe, cuando cada elemento visual tiene una función cognitiva y no decorativa, cuando la jerarquía visual guía la mirada del lector en el orden correcto — ocurre algo cualitativamente diferente a leer un texto o escuchar una explicación: <strong>se activan simultáneamente dos sistemas de memoria independientes</strong>. Y eso tiene consecuencias medibles sobre la retención y la capacidad de recuperar la información cuando se necesita — en un examen, o frente a un paciente.</p>
-      <p>En educación médica, donde la densidad de información es extrema y el tiempo de estudio es escaso, una infografía bien diseñada no es un complemento estético al material docente. Es, en muchos contextos, <strong>el formato más eficiente que existe para consolidar conocimiento clínico complejo</strong>. La pregunta no es si usarlas. Es cómo diseñarlas para que funcionen de verdad.</p>
-      <div class="note"><strong>Dato propio:</strong> nuestro grupo demostró en 2025 que las infografías con guiones clínicos mejoran de forma significativa el rendimiento de los estudiantes de medicina — con un diseño de intervención intrasujeto y análisis por género. No es intuición pedagógica: es evidencia. Corral-Gudino et al. <em>Med Sci Edu</em> 2025.</div>
+      <p>Pero cuando una infografía está bien construida — cuando el texto está junto a la imagen que describe, cuando cada elemento visual tiene una función cognitiva y no decorativa, cuando la jerarquía visual guía la mirada del lector en el orden correcto — ocurre algo cualitativamente diferente: <strong>se activan simultáneamente dos sistemas de memoria independientes</strong>.</p>
+      <p>En educación médica, donde la densidad de información es extrema y el tiempo de estudio es escaso, una infografía bien diseñada no es un complemento estético. Es, en muchos contextos, <strong>el formato más eficiente para consolidar conocimiento clínico complejo</strong>. La pregunta no es si usarlas. Es cómo diseñarlas para que funcionen de verdad.</p>
+      <div class="note"><strong>Dato propio:</strong> nuestro grupo demostró en 2025 que las infografías con guiones clínicos mejoran de forma significativa el rendimiento de los estudiantes de medicina. Corral-Gudino et al. <em>Med Sci Edu</em> 2025.</div>
     </div>
   </div>
 
   <div class="section-label">¿Por qué funcionan?</div>
-
   <div class="card">
     <div class="card-title">1️⃣ Teoría de la Codificación Dual · Allan Paivio</div>
     <div class="card-body">
@@ -784,13 +696,12 @@ footer a:hover{text-decoration:underline}
     <div class="card-title">2️⃣ Contigüidad espacial · Diseño = didáctica</div>
     <div class="card-body">
       <p>Si el texto está cerca del gráfico, la mente lo asocia mejor. Si el estudiante tiene que saltar de un lado al otro, usa su memoria de trabajo en eso — no en aprender.</p>
-      <p>Una infografía no admite "información inútil". Obliga al docente a definir qué va, qué no y cómo representarlo. Eso, en sí, ya mejora la enseñanza. El <strong>principio de coherencia</strong> en su máxima expresión.</p>
+      <p>Una infografía no admite "información inútil". Obliga al docente a definir qué va, qué no y cómo representarlo. El <strong>principio de coherencia</strong> en su máxima expresión.</p>
       <div class="quote-simple" style="margin-top:12px">Diseño = didáctica.</div>
     </div>
   </div>
 
   <div class="section-label">Cómo crearlas bien</div>
-
   <div class="card">
     <div class="card-title">✅ 4 consejos para una buena infografía</div>
     <div class="card-body">
@@ -800,78 +711,65 @@ footer a:hover{text-decoration:underline}
         <div class="step"><div class="step-num">C</div><div class="step-content"><h4>Menos es más</h4><p>Si ya consigues tu objetivo con lo que tienes, ¿para qué añadir algo que solo aporte estética? Diseño limpio, texto e imágenes contiguos.</p></div></div>
         <div class="step"><div class="step-num">D</div><div class="step-content"><h4>Diseñalas pensando en el repaso</h4><p>Que se conviertan en <strong>síntesis visuales o mapas mentales</strong> del tema que quieres explicar.</p></div></div>
       </div>
-      <div class="note"><strong>Con IA generativa:</strong> Si las creas con inteligencia artificial, parte de un prompt muy detallado y luego "pódalas" hasta dejar la esencia. No adornes por adornar.</div>
+      <div class="note"><strong>Con IA generativa:</strong> parte de un prompt muy detallado y luego "pódalas" hasta dejar la esencia. No adornes por adornar.</div>
     </div>
   </div>
 
   <div class="card">
     <div class="card-title">🏆 Evidencia propia · EduMed UVa</div>
     <div class="card-body">
-      <div class="note"><strong>Premio a la mejor innovación docente 2025</strong> del Consejo Social de la UVa, concedido al grupo <em>"SEMIOLOGÍA EN IMÁGENES"</em>, basado en infografías con guiones clínicos.</div>
+      <div class="note"><strong>Premio a la mejor innovación docente 2025</strong> del Consejo Social de la UVa, concedido al grupo <em>"SEMIOLOGÍA EN IMÁGENES"</em>.</div>
       <p>• Corral-Gudino et al. <em>Infographics with Clinical Summaries Improve Medical Student Performance: A Within-Subject Intervention Study with Gender-Based Analysis.</em> Med Sci Edu 2025.</p>
       <p style="margin-top:8px">• Hernández-Sánchez S et al. Twelve tips to make successful medical infographics. <em>Med Teach.</em> 2021.</p>
     </div>
   </div>
 
-  <div class="quote-simple">
-    Una infografía no es un póster bonito. Es un dispositivo cognitivo. Es una clase comprimida. Es una memoria visual. Si quieres que tus alumnos recuerden lo que enseñas, deberías estar usándolas ya.
-  </div>
+  <div class="quote-simple">Una infografía no es un póster bonito. Es un dispositivo cognitivo. Es una clase comprimida. Es una memoria visual. Si quieres que tus alumnos recuerden lo que enseñas, deberías estar usándolas ya.</div>
 
-  <!-- VÍDEO CIERRE -->
   <div class="video-card">
-    <div class="video-card-label">
-      ▶ Cierre de sección <span>· Avatar EduMed · &lt;1 min</span>
-      <button class="video-toggle" onclick="toggleVideo(this)">Ver vídeo</button>
-    </div>
-    <div class="video-wrap">
-      <iframe src="https://www.youtube.com/embed/y4q3kEbdJ0M" allowfullscreen loading="lazy"></iframe>
-    </div>
+    <div class="video-card-label">▶ Cierre de sección <span>· Avatar EduMed · &lt;1 min</span>
+      <button class="video-toggle" onclick="toggleVideo(this)">Ver vídeo</button></div>
+    <div class="video-wrap"><iframe src="https://www.youtube.com/embed/y4q3kEbdJ0M" allowfullscreen loading="lazy"></iframe></div>
   </div>
 
 </div>
 
 <!-- ══ TAB 5 ══ -->
 <div id="panel-tab5" class="panel">
-
   <div class="card">
     <div class="card-title">🔑 Glosario de conceptos clave</div>
     <div class="card-body"><p>Términos esenciales para comprender y aplicar los fundamentos del aprendizaje multimedia en educación médica.</p></div>
   </div>
-
   <div class="glos-item"><div class="glos-cat">Teoría · Mayer</div><div class="glos-term">Aprendizaje multimedia</div><div class="glos-def">Aprendizaje a partir de palabras e imágenes combinadas. Según Mayer, aprendemos mejor cuando procesamos ambos formatos de forma complementaria que cuando usamos solo texto.</div></div>
   <div class="glos-item"><div class="glos-cat">Cognición</div><div class="glos-term">Doble canal</div><div class="glos-def">Principio que establece que los seres humanos procesamos la información a través de dos canales independientes: el visual/pictórico (imágenes, diagramas) y el auditivo/verbal (narración, palabras habladas).</div></div>
   <div class="glos-item"><div class="glos-cat">Cognición</div><div class="glos-term">Memoria de trabajo</div><div class="glos-def">Componente del sistema cognitivo donde se procesa activamente la información. Tiene capacidad limitada, lo que hace imprescindible gestionar bien la carga cognitiva en el diseño del material docente.</div></div>
-  <div class="glos-item"><div class="glos-cat">Cognición</div><div class="glos-term">Carga cognitiva intrínseca</div><div class="glos-def">Carga inherente a la complejidad de la materia que se enseña. No es alterable. En medicina, suele ser alta por naturaleza.</div></div>
+  <div class="glos-item"><div class="glos-cat">Cognición</div><div class="glos-term">Carga cognitiva intrínseca</div><div class="glos-def">Carga inherente a la complejidad de la materia. No es alterable. En medicina, suele ser alta por naturaleza.</div></div>
   <div class="glos-item"><div class="glos-cat">Cognición</div><div class="glos-term">Carga cognitiva extrínseca</div><div class="glos-def">Carga generada por el diseño del material: ruido visual, animaciones innecesarias, texto excesivo en pantalla. Debe reducirse al máximo porque no contribuye al aprendizaje.</div></div>
   <div class="glos-item"><div class="glos-cat">Cognición</div><div class="glos-term">Carga cognitiva pertinente</div><div class="glos-def">Carga relacionada con el procesamiento activo y la construcción profunda del conocimiento. A diferencia de la extrínseca, esta debe fomentarse.</div></div>
   <div class="glos-item"><div class="glos-cat">Principio · Mayer</div><div class="glos-term">Contigüidad espacial</div><div class="glos-def">Los textos y etiquetas deben colocarse junto a los elementos gráficos que describen, evitando que el estudiante tenga que hacer barridos visuales lejanos para asociar la información.</div></div>
   <div class="glos-item"><div class="glos-cat">Principio · Mayer</div><div class="glos-term">Contigüidad temporal</div><div class="glos-def">La narración y las imágenes correspondientes deben presentarse de forma simultánea, no desfasada.</div></div>
   <div class="glos-item"><div class="glos-cat">Principio · Mayer</div><div class="glos-term">Coherencia</div><div class="glos-def">Se aprende mejor cuando se elimina del material todo lo irrelevante: imágenes decorativas, música de fondo, animaciones o anécdotas sin relación directa con el objetivo de aprendizaje.</div></div>
-  <div class="glos-item"><div class="glos-cat">Principio · Mayer</div><div class="glos-term">Modalidad</div><div class="glos-def">Se aprende mejor mediante NARRACIÓN + GRÁFICOS que mediante TEXTO EN PANTALLA + GRÁFICOS. La voz y la imagen distribuyen la carga entre los dos canales; el texto y la imagen los saturan simultáneamente.</div></div>
+  <div class="glos-item"><div class="glos-cat">Principio · Mayer</div><div class="glos-term">Modalidad</div><div class="glos-def">Se aprende mejor mediante NARRACIÓN + GRÁFICOS que mediante TEXTO EN PANTALLA + GRÁFICOS. La voz y la imagen distribuyen la carga entre los dos canales.</div></div>
   <div class="glos-item"><div class="glos-cat">Principio · Mayer</div><div class="glos-term">Segmentación</div><div class="glos-def">La información compleja se aprende mejor cuando se divide en segmentos pequeños y manejables, con límites claros entre partes, permitiendo al estudiante controlar el ritmo.</div></div>
   <div class="glos-item"><div class="glos-cat">Principio · Mayer</div><div class="glos-term">Actividades generativas</div><div class="glos-def">Estrategias en las que el estudiante construye activamente el conocimiento: elaborar mapas conceptuales, escribir resúmenes, crear analogías, enseñar a otros.</div></div>
-  <div class="glos-item"><div class="glos-cat">Fenómeno cognitivo</div><div class="glos-term">Reversión de la experiencia</div><div class="glos-def">Efecto por el cual lo que beneficia al aprendizaje en estudiantes novatos (material redundante, multicanal) puede perjudicar a los expertos, quienes procesan mejor con menos estímulos porque ya generan sus propias representaciones mentales.</div></div>
+  <div class="glos-item"><div class="glos-cat">Fenómeno cognitivo</div><div class="glos-term">Reversión de la experiencia</div><div class="glos-def">Efecto por el cual lo que beneficia al aprendizaje en estudiantes novatos puede perjudicar a los expertos, quienes procesan mejor con menos estímulos porque ya generan sus propias representaciones mentales.</div></div>
   <div class="glos-item"><div class="glos-cat">Teoría</div><div class="glos-term">Codificación dual · Paivio</div><div class="glos-def">La información procesada simultáneamente como texto y como imagen genera dos huellas de memoria independientes (verbal y visual), mejorando tanto la retención como la recuperación posterior.</div></div>
   <div class="glos-item"><div class="glos-cat">Pedagogía</div><div class="glos-term">Andamiaje (Scaffolding)</div><div class="glos-def">Estructura de apoyo temporal que el docente proporciona para guiar el aprendizaje del estudiante. El descubrimiento guiado supera al descubrimiento libre.</div></div>
   <div class="glos-item"><div class="glos-cat">Herramienta educativa</div><div class="glos-term">Microvídeo</div><div class="glos-def">Contenido audiovisual de muy corta duración (15 s – 3 min). Su alineación con los principios de Mayer explica su efectividad educativa cuando está bien diseñado.</div></div>
   <div class="glos-item"><div class="glos-cat">Herramienta educativa</div><div class="glos-term">Infografía educativa</div><div class="glos-def">Dispositivo cognitivo que combina texto e imagen de forma integrada para generar doble codificación (Paivio). No es un "póster bonito": es una clase comprimida y una memoria visual.</div></div>
-
 </div>
 
 <!-- ══ TAB 6 ══ -->
 <div id="panel-tab6" class="panel">
-
   <div class="card">
     <div class="card-title">🎯 ¿Cómo mejorarlo?</div>
     <div class="card-body">
       <p>A continuación encontrarás <strong>8 situaciones docentes reales con un error de diseño</strong>. En el anverso de cada tarjeta se describe la situación. Antes de darle la vuelta, intenta identificar el problema y cómo lo resolverías. En el reverso encontrarás el error concreto, el principio implicado y la solución.</p>
-      <div class="note"><strong>Cómo usarlas:</strong> lee el anverso, reflexiona unos segundos, y pulsa la tarjeta para ver el reverso. Puedes volver a girarla cuando quieras.</div>
+      <div class="note"><strong>Cómo usarlas:</strong> lee el anverso, reflexiona unos segundos, y pulsa la tarjeta para ver el reverso.</div>
     </div>
   </div>
 
   <div class="fc-grid">
-
-    <!-- CARD 1 -->
     <div class="fc" onclick="flipCard(this)">
       <div class="fc-inner">
         <div class="fc-front">
@@ -884,13 +782,12 @@ footer a:hover{text-decoration:underline}
           <div class="fc-principle">📌 Principio de redundancia</div>
           <div class="fc-scroll">
             <div class="fc-error"><strong>El error:</strong> Al leer el texto que ya está en pantalla, el profesor satura simultáneamente el canal visual y el auditivo con la misma información. Eso no refuerza: aumenta la carga extrínseca.</div>
-            <div class="fc-fix"><strong>La solución:</strong> Dejar en la diapositiva solo una imagen o palabras clave y narrar oralmente la información que se quiere transmitir. Cada canal aporta algo diferente.</div>
+            <div class="fc-fix"><strong>La solución:</strong> Dejar en la diapositiva solo una imagen o palabras clave y narrar oralmente la información. Cada canal debe aportar algo diferente.</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- CARD 2 -->
     <div class="fc" onclick="flipCard(this)">
       <div class="fc-inner">
         <div class="fc-front">
@@ -902,14 +799,13 @@ footer a:hover{text-decoration:underline}
           <div class="fc-label fc-label-back">Reverso · Error y solución</div>
           <div class="fc-principle">📌 Principio de contigüidad temporal</div>
           <div class="fc-scroll">
-            <div class="fc-error"><strong>El error:</strong> La imagen y la narración están desfasadas. El alumno ve el esquema completo sin saber qué parte mirar, y cuando llega la explicación ya no recuerda bien lo que vio. La memoria de trabajo gasta recursos en ese esfuerzo de asociación retardada.</div>
-            <div class="fc-fix"><strong>La solución:</strong> Sincronizar imagen y narración. Mostrar cada fase del ciclo justo en el momento en que la voz la explica. Lo que se ve y lo que se oye deben ocurrir al mismo tiempo.</div>
+            <div class="fc-error"><strong>El error:</strong> La imagen y la narración están desfasadas. El alumno ve el esquema completo sin saber qué parte mirar, y cuando llega la explicación ya no recuerda bien lo que vio. La memoria de trabajo gasta recursos en esa asociación retardada.</div>
+            <div class="fc-fix"><strong>La solución:</strong> Sincronizar imagen y narración. Mostrar cada fase del ciclo justo en el momento en que la voz la explica.</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- CARD 3 -->
     <div class="fc" onclick="flipCard(this)">
       <div class="fc-inner">
         <div class="fc-front">
@@ -928,7 +824,6 @@ footer a:hover{text-decoration:underline}
       </div>
     </div>
 
-    <!-- CARD 4 -->
     <div class="fc" onclick="flipCard(this)">
       <div class="fc-inner">
         <div class="fc-front">
@@ -940,14 +835,13 @@ footer a:hover{text-decoration:underline}
           <div class="fc-label fc-label-back">Reverso · Error y solución</div>
           <div class="fc-principle">📌 Principio de entrenamiento previo</div>
           <div class="fc-scroll">
-            <div class="fc-error"><strong>El error:</strong> El alumno novato no tiene esquemas previos sobre los que anclar el caso. Su memoria de trabajo intenta procesar simultáneamente los valores, los rangos normales, los mecanismos compensadores y el contexto clínico. El resultado es saturación, no aprendizaje.</div>
-            <div class="fc-fix"><strong>La solución:</strong> Antes del caso, presentar los componentes básicos: qué mide cada parámetro, cuáles son sus rangos normales y qué mecanismo altera cada uno. Construir primero el esquema; aplicarlo después. No es infantilizar: es enseñar bien.</div>
+            <div class="fc-error"><strong>El error:</strong> El alumno novato no tiene esquemas previos sobre los que anclar el caso. Su memoria de trabajo intenta procesar simultáneamente los valores, rangos normales, mecanismos compensadores y contexto clínico. El resultado es saturación, no aprendizaje.</div>
+            <div class="fc-fix"><strong>La solución:</strong> Antes del caso, presentar los componentes básicos: qué mide cada parámetro, cuáles son sus rangos normales y qué mecanismo altera cada uno. Construir primero el esquema; aplicarlo después.</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- CARD 5 -->
     <div class="fc" onclick="flipCard(this)">
       <div class="fc-inner">
         <div class="fc-front">
@@ -959,14 +853,13 @@ footer a:hover{text-decoration:underline}
           <div class="fc-label fc-label-back">Reverso · Error y solución</div>
           <div class="fc-principle">📌 Principio de segmentación</div>
           <div class="fc-scroll">
-            <div class="fc-error"><strong>El error:</strong> La memoria de trabajo del alumno colapsa mucho antes de llegar al fármaco 14. Nadie pregunta no porque todo esté claro, sino porque ya no queda capacidad cognitiva disponible para formular una pregunta. El silencio final no es señal de comprensión.</div>
-            <div class="fc-fix"><strong>La solución:</strong> Dividir el contenido en bloques de 10–15 minutos con pausas activas entre ellos. Mejor cubrir 5 fármacos bien que 14 superficialmente. La profundidad sobre pocos casos transfiere mejor que la amplitud sobre muchos.</div>
+            <div class="fc-error"><strong>El error:</strong> La memoria de trabajo del alumno colapsa mucho antes del fármaco 14. Nadie pregunta no porque todo esté claro, sino porque ya no queda capacidad cognitiva para formular una pregunta. El silencio no es señal de comprensión.</div>
+            <div class="fc-fix"><strong>La solución:</strong> Dividir el contenido en bloques de 10–15 minutos con pausas activas entre ellos. Mejor cubrir 5 fármacos bien que 14 superficialmente.</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- CARD 6 -->
     <div class="fc" onclick="flipCard(this)">
       <div class="fc-inner">
         <div class="fc-front">
@@ -978,14 +871,13 @@ footer a:hover{text-decoration:underline}
           <div class="fc-label fc-label-back">Reverso · Error y solución</div>
           <div class="fc-principle">📌 Principio de coherencia</div>
           <div class="fc-scroll">
-            <div class="fc-error"><strong>El error:</strong> Cada elemento irrelevante — la música, la animación, los datos históricos — consume parte de la capacidad limitada de la memoria de trabajo sin contribuir al aprendizaje. No es neutral: activamente perjudica la comprensión.</div>
-            <div class="fc-fix"><strong>La solución:</strong> Eliminar todo lo que no sea estrictamente necesario para el objetivo de aprendizaje. Empieza directamente con la técnica. Menos es más. Un vídeo de 3 minutos limpio enseña más que uno de 8 minutos con relleno.</div>
+            <div class="fc-error"><strong>El error:</strong> Cada elemento irrelevante — la música, la animación, los datos históricos — consume parte de la memoria de trabajo sin contribuir al aprendizaje. No es neutral: activamente perjudica la comprensión.</div>
+            <div class="fc-fix"><strong>La solución:</strong> Eliminar todo lo que no sea estrictamente necesario. Empieza directamente con la técnica. Un vídeo de 3 minutos limpio enseña más que uno de 8 minutos con relleno.</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- CARD 7 -->
     <div class="fc" onclick="flipCard(this)">
       <div class="fc-inner">
         <div class="fc-front">
@@ -997,14 +889,13 @@ footer a:hover{text-decoration:underline}
           <div class="fc-label fc-label-back">Reverso · Error y solución</div>
           <div class="fc-principle">📌 Desajuste entre formato auditivo y bajo conocimiento previo</div>
           <div class="fc-scroll">
-            <div class="fc-error"><strong>El error:</strong> El estudiante novato no tiene esquemas mentales sobre los que anclar lo que escucha. El audio es un formato transitorio: las palabras desaparecen según se pronuncian, sin dejar huella visual o textual estable. Sin una base previa, la memoria de trabajo se satura intentando construir estructura y significado al mismo tiempo. El resultado es que se escuchan las palabras, pero no se construye comprensión real.</div>
-            <div class="fc-fix"><strong>La solución:</strong> Acompañar el podcast con una infografía, un esquema o un texto de apoyo que ofrezca estructura estable antes o durante la escucha. El formato auditivo puro funciona bien cuando ya existe una base sólida — para repasar, consolidar o profundizar. No como primer contacto con un tema complejo.</div>
+            <div class="fc-error"><strong>El error:</strong> El estudiante novato no tiene esquemas donde anclar lo que escucha. El audio es un formato transitorio: las palabras desaparecen según se pronuncian, sin dejar huella visual o textual estable. Sin base previa, la memoria de trabajo se satura intentando construir estructura y significado al mismo tiempo.</div>
+            <div class="fc-fix"><strong>La solución:</strong> Acompañar el podcast con una infografía, un esquema o un texto de apoyo que ofrezca estructura estable. El formato auditivo puro es eficaz cuando ya existe una base sólida — para repasar o consolidar, no como primer contacto con un tema complejo.</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- CARD 8 -->
     <div class="fc" onclick="flipCard(this)">
       <div class="fc-inner">
         <div class="fc-front">
@@ -1017,19 +908,16 @@ footer a:hover{text-decoration:underline}
           <div class="fc-principle">📌 Principio de actividades generativas</div>
           <div class="fc-scroll">
             <div class="fc-error"><strong>El error:</strong> Repasar diapositivas es una actividad pasiva. El alumno reconoce la información al verla, pero eso genera una falsa sensación de dominio. Sin procesar activamente — seleccionando, organizando, conectando — la información no se consolida en la memoria a largo plazo.</div>
-            <div class="fc-fix"><strong>La solución:</strong> Pedir al alumno que haga algo con la información: que resuma los 3 conceptos clave en sus propias palabras, que dibuje el mecanismo sin mirar las diapositivas, que explique a un compañero qué ocurre en la compensación cardíaca. El esfuerzo cognitivo incómodo es precisamente el que genera aprendizaje duradero.</div>
+            <div class="fc-fix"><strong>La solución:</strong> Pedir al alumno que haga algo con la información: que resuma los 3 conceptos clave en sus propias palabras, que dibuje el mecanismo sin mirar los apuntes, que explique a un compañero qué ocurre en la compensación cardíaca.</div>
           </div>
         </div>
       </div>
     </div>
-
-  </div><!-- /fc-grid -->
-
-  <div class="quote-simple" style="margin-top:8px">
-    Identificar el error es el primer paso. Diseñar la solución es el aprendizaje real.
   </div>
 
+  <div class="quote-simple">Identificar el error es el primer paso. Diseñar la solución es el aprendizaje real.</div>
 </div>
+
 </main>
 
 <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Volver al inicio">↑</button>
@@ -1044,6 +932,7 @@ footer a:hover{text-decoration:underline}
 </footer>
 
 <script>
+// Navegación principal
 function switchTab(id, btn) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -1051,19 +940,36 @@ function switchTab(id, btn) {
   btn.classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
 }
+
+// Pestañas de carga cognitiva (nombres de clase totalmente distintos)
+function switchCarga(id, btn) {
+  const box = btn.closest('.carga-box');
+  box.querySelectorAll('.cpanel').forEach(p => p.classList.remove('cpanel-active'));
+  box.querySelectorAll('.ctab').forEach(t => t.classList.remove('ctab-active'));
+  box.querySelector('#cpanel-' + id).classList.add('cpanel-active');
+  btn.classList.add('ctab-active');
+}
+
+// Acordeones
 function toggleAcc(header) {
   const body = header.nextElementSibling;
   const isOpen = header.classList.contains('open');
   header.classList.toggle('open', !isOpen);
   body.classList.toggle('open', !isOpen);
 }
+
+// Vídeos
 function toggleVideo(btn) {
   const wrap = btn.closest('.video-card').querySelector('.video-wrap');
   const isOpen = wrap.classList.contains('open');
   wrap.classList.toggle('open', !isOpen);
   btn.textContent = isOpen ? 'Ver vídeo' : 'Ocultar vídeo';
 }
+
+// Flashcards
 function flipCard(card) { card.classList.toggle('flipped'); }
+
+// Botón volver arriba
 const backTop = document.getElementById('backTop');
 window.addEventListener('scroll', () => backTop.classList.toggle('visible', window.scrollY > 300));
 </script>
