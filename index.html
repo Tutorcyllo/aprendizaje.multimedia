@@ -152,6 +152,28 @@ tr:nth-child(even) td{background:var(--gray-50)}
 .glos-term{font-weight:700;color:var(--gray-900);margin-bottom:4px;font-size:.9rem}
 .glos-def{font-size:.83rem;color:var(--gray-700);line-height:1.6}
 
+/* FLASHCARDS */
+.fc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:14px}
+@media(max-width:640px){.fc-grid{grid-template-columns:1fr}}
+.fc{height:300px;cursor:pointer;perspective:1000px;user-select:none}
+.fc-inner{position:relative;width:100%;height:100%;transition:transform .55s cubic-bezier(.4,0,.2,1);transform-style:preserve-3d}
+.fc.flipped .fc-inner{transform:rotateY(180deg)}
+.fc-front,.fc-back{position:absolute;inset:0;border-radius:var(--radius);padding:20px;backface-visibility:hidden;display:flex;flex-direction:column;gap:8px;overflow:hidden}
+.fc-front{background:var(--gray-700);border:2px solid var(--yellow-deep)}
+.fc-back{background:var(--yellow-pale);border:2px solid var(--yellow-deep);transform:rotateY(180deg)}
+.fc-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--yellow);opacity:.8;flex-shrink:0}
+.fc-label-back{color:var(--yellow-deep);opacity:1}
+.fc-question{font-size:.88rem;font-weight:600;color:var(--white);line-height:1.55;flex:1;overflow-y:auto}
+.fc-question::-webkit-scrollbar{width:3px}
+.fc-question::-webkit-scrollbar-thumb{background:rgba(255,255,255,.2);border-radius:3px}
+.fc-cta{font-size:.72rem;color:var(--yellow);opacity:.7;flex-shrink:0}
+.fc-principle{font-size:.78rem;font-weight:700;color:var(--yellow-deep);background:var(--yellow-mid);border-radius:6px;padding:5px 10px;display:inline-block;width:fit-content;flex-shrink:0}
+.fc-scroll{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding-right:4px}
+.fc-scroll::-webkit-scrollbar{width:3px}
+.fc-scroll::-webkit-scrollbar-thumb{background:var(--yellow-mid);border-radius:3px}
+.fc-error{font-size:.82rem;color:var(--gray-700);line-height:1.55}
+.fc-fix{font-size:.82rem;color:var(--gray-700);line-height:1.55;border-top:1px solid var(--yellow-mid);padding-top:8px}
+
 /* BACK TOP */
 .back-top{position:fixed;bottom:24px;right:24px;width:44px;height:44px;border-radius:50%;background:var(--gray-900);color:var(--yellow);border:none;cursor:pointer;font-size:1.2rem;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-md);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:200}
 .back-top.visible{opacity:1;pointer-events:auto}
@@ -233,6 +255,7 @@ footer a:hover{text-decoration:underline}
     <button class="tab" onclick="switchTab('tab3',this)">🎬 Microvideos y podcasts</button>
     <button class="tab" onclick="switchTab('tab4',this)">🖼️ Infografías</button>
     <button class="tab" onclick="switchTab('tab5',this)">🔑 Conceptos clave</button>
+    <button class="tab" onclick="switchTab('tab6',this)">🎯 ¿Cómo mejorarlo?</button>
   </div>
 </div>
 
@@ -834,6 +857,179 @@ footer a:hover{text-decoration:underline}
   <div class="glos-item"><div class="glos-cat">Herramienta educativa</div><div class="glos-term">Infografía educativa</div><div class="glos-def">Dispositivo cognitivo que combina texto e imagen de forma integrada para generar doble codificación (Paivio). No es un "póster bonito": es una clase comprimida y una memoria visual.</div></div>
 
 </div>
+
+<!-- ══ TAB 6 ══ -->
+<div id="panel-tab6" class="panel">
+
+  <div class="card">
+    <div class="card-title">🎯 ¿Cómo mejorarlo?</div>
+    <div class="card-body">
+      <p>A continuación encontrarás <strong>8 situaciones docentes reales con un error de diseño</strong>. En el anverso de cada tarjeta se describe la situación. Antes de darle la vuelta, intenta identificar el problema y cómo lo resolverías. En el reverso encontrarás el error concreto, el principio implicado y la solución.</p>
+      <div class="note"><strong>Cómo usarlas:</strong> lee el anverso, reflexiona unos segundos, y pulsa la tarjeta para ver el reverso. Puedes volver a girarla cuando quieras.</div>
+    </div>
+  </div>
+
+  <div class="fc-grid">
+
+    <!-- CARD 1 -->
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front">
+          <div class="fc-label">Anverso · Identifica el error</div>
+          <div class="fc-question">En una diapositiva aparece la descripción completa de un proceso fisiopatológico. El profesor la lee tal cual está escrita en pantalla.</div>
+          <div class="fc-cta">Pulsa para ver la solución ▼</div>
+        </div>
+        <div class="fc-back">
+          <div class="fc-label fc-label-back">Reverso · Error y solución</div>
+          <div class="fc-principle">📌 Principio de redundancia</div>
+          <div class="fc-scroll">
+            <div class="fc-error"><strong>El error:</strong> Al leer el texto que ya está en pantalla, el profesor satura simultáneamente el canal visual y el auditivo con la misma información. Eso no refuerza: aumenta la carga extrínseca.</div>
+            <div class="fc-fix"><strong>La solución:</strong> Dejar en la diapositiva solo una imagen o palabras clave y narrar oralmente la información que se quiere transmitir. Cada canal aporta algo diferente.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front">
+          <div class="fc-label">Anverso · Identifica el error</div>
+          <div class="fc-question">Un microvídeo muestra primero durante 20 segundos un esquema completo del ciclo cardíaco. Después, la narración empieza a explicar cada fase.</div>
+          <div class="fc-cta">Pulsa para ver la solución ▼</div>
+        </div>
+        <div class="fc-back">
+          <div class="fc-label fc-label-back">Reverso · Error y solución</div>
+          <div class="fc-principle">📌 Principio de contigüidad temporal</div>
+          <div class="fc-scroll">
+            <div class="fc-error"><strong>El error:</strong> La imagen y la narración están desfasadas. El alumno ve el esquema completo sin saber qué parte mirar, y cuando llega la explicación ya no recuerda bien lo que vio. La memoria de trabajo gasta recursos en ese esfuerzo de asociación retardada.</div>
+            <div class="fc-fix"><strong>La solución:</strong> Sincronizar imagen y narración. Mostrar cada fase del ciclo justo en el momento en que la voz la explica. Lo que se ve y lo que se oye deben ocurrir al mismo tiempo.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front">
+          <div class="fc-label">Anverso · Identifica el error</div>
+          <div class="fc-question">Una infografía sobre los criterios diagnósticos de sepsis incluye un diagrama central, la tabla de criterios SOFA en una esquina, las definiciones en el margen inferior y una flecha que cruza toda la imagen.</div>
+          <div class="fc-cta">Pulsa para ver la solución ▼</div>
+        </div>
+        <div class="fc-back">
+          <div class="fc-label fc-label-back">Reverso · Error y solución</div>
+          <div class="fc-principle">📌 Principio de contigüidad espacial</div>
+          <div class="fc-scroll">
+            <div class="fc-error"><strong>El error:</strong> El alumno tiene que hacer barridos visuales continuos para asociar cada elemento con su explicación. Ese movimiento ocular consume memoria de trabajo que debería estar disponible para aprender, no para buscar.</div>
+            <div class="fc-fix"><strong>La solución:</strong> Colocar cada etiqueta o texto explicativo inmediatamente junto al elemento visual que describe. Las líneas de conexión, si son necesarias, deben ser cortas. Diseño = didáctica.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 4 -->
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front">
+          <div class="fc-label">Anverso · Identifica el error</div>
+          <div class="fc-question">Una clase sobre interpretación de gasometrías comienza directamente con un caso clínico complejo: pH 7.28, pCO₂ 52, HCO₃ 24, lactato 4.1. El profesor pregunta al grupo: "¿Qué está pasando aquí?"</div>
+          <div class="fc-cta">Pulsa para ver la solución ▼</div>
+        </div>
+        <div class="fc-back">
+          <div class="fc-label fc-label-back">Reverso · Error y solución</div>
+          <div class="fc-principle">📌 Principio de entrenamiento previo</div>
+          <div class="fc-scroll">
+            <div class="fc-error"><strong>El error:</strong> El alumno novato no tiene esquemas previos sobre los que anclar el caso. Su memoria de trabajo intenta procesar simultáneamente los valores, los rangos normales, los mecanismos compensadores y el contexto clínico. El resultado es saturación, no aprendizaje.</div>
+            <div class="fc-fix"><strong>La solución:</strong> Antes del caso, presentar los componentes básicos: qué mide cada parámetro, cuáles son sus rangos normales y qué mecanismo altera cada uno. Construir primero el esquema; aplicarlo después. No es infantilizar: es enseñar bien.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 5 -->
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front">
+          <div class="fc-label">Anverso · Identifica el error</div>
+          <div class="fc-question">Un seminario sobre farmacología cubre en 50 minutos 14 fármacos, sus mecanismos, efectos adversos e interacciones. Al final, el profesor pregunta si hay dudas. Nadie pregunta nada.</div>
+          <div class="fc-cta">Pulsa para ver la solución ▼</div>
+        </div>
+        <div class="fc-back">
+          <div class="fc-label fc-label-back">Reverso · Error y solución</div>
+          <div class="fc-principle">📌 Principio de segmentación</div>
+          <div class="fc-scroll">
+            <div class="fc-error"><strong>El error:</strong> La memoria de trabajo del alumno colapsa mucho antes de llegar al fármaco 14. Nadie pregunta no porque todo esté claro, sino porque ya no queda capacidad cognitiva disponible para formular una pregunta. El silencio final no es señal de comprensión.</div>
+            <div class="fc-fix"><strong>La solución:</strong> Dividir el contenido en bloques de 10–15 minutos con pausas activas entre ellos. Mejor cubrir 5 fármacos bien que 14 superficialmente. La profundidad sobre pocos casos transfiere mejor que la amplitud sobre muchos.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 6 -->
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front">
+          <div class="fc-label">Anverso · Identifica el error</div>
+          <div class="fc-question">Un vídeo docente sobre exploración abdominal incluye música de fondo, una animación de introducción de 15 segundos con el logo institucional, y datos históricos sobre la semiología que no se relacionan con la técnica explicada.</div>
+          <div class="fc-cta">Pulsa para ver la solución ▼</div>
+        </div>
+        <div class="fc-back">
+          <div class="fc-label fc-label-back">Reverso · Error y solución</div>
+          <div class="fc-principle">📌 Principio de coherencia</div>
+          <div class="fc-scroll">
+            <div class="fc-error"><strong>El error:</strong> Cada elemento irrelevante — la música, la animación, los datos históricos — consume parte de la capacidad limitada de la memoria de trabajo sin contribuir al aprendizaje. No es neutral: activamente perjudica la comprensión.</div>
+            <div class="fc-fix"><strong>La solución:</strong> Eliminar todo lo que no sea estrictamente necesario para el objetivo de aprendizaje. Empieza directamente con la técnica. Menos es más. Un vídeo de 3 minutos limpio enseña más que uno de 8 minutos con relleno.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 7 -->
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front">
+          <div class="fc-label">Anverso · Identifica el error</div>
+          <div class="fc-question">Un podcast sobre diagnóstico diferencial del dolor torácico se ofrece como único recurso de estudio para estudiantes de 3.º que abordan el tema por primera vez.</div>
+          <div class="fc-cta">Pulsa para ver la solución ▼</div>
+        </div>
+        <div class="fc-back">
+          <div class="fc-label fc-label-back">Reverso · Error y solución</div>
+          <div class="fc-principle">📌 Desajuste entre formato auditivo y bajo conocimiento previo</div>
+          <div class="fc-scroll">
+            <div class="fc-error"><strong>El error:</strong> El estudiante novato no tiene esquemas mentales sobre los que anclar lo que escucha. El audio es un formato transitorio: las palabras desaparecen según se pronuncian, sin dejar huella visual o textual estable. Sin una base previa, la memoria de trabajo se satura intentando construir estructura y significado al mismo tiempo. El resultado es que se escuchan las palabras, pero no se construye comprensión real.</div>
+            <div class="fc-fix"><strong>La solución:</strong> Acompañar el podcast con una infografía, un esquema o un texto de apoyo que ofrezca estructura estable antes o durante la escucha. El formato auditivo puro funciona bien cuando ya existe una base sólida — para repasar, consolidar o profundizar. No como primer contacto con un tema complejo.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 8 -->
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front">
+          <div class="fc-label">Anverso · Identifica el error</div>
+          <div class="fc-question">Tras una clase de 45 minutos sobre insuficiencia cardíaca, el profesor pide a los alumnos que estudien en casa repasando las diapositivas. En el siguiente seminario, comprueba que apenas recuerdan los conceptos clave.</div>
+          <div class="fc-cta">Pulsa para ver la solución ▼</div>
+        </div>
+        <div class="fc-back">
+          <div class="fc-label fc-label-back">Reverso · Error y solución</div>
+          <div class="fc-principle">📌 Principio de actividades generativas</div>
+          <div class="fc-scroll">
+            <div class="fc-error"><strong>El error:</strong> Repasar diapositivas es una actividad pasiva. El alumno reconoce la información al verla, pero eso genera una falsa sensación de dominio. Sin procesar activamente — seleccionando, organizando, conectando — la información no se consolida en la memoria a largo plazo.</div>
+            <div class="fc-fix"><strong>La solución:</strong> Pedir al alumno que haga algo con la información: que resuma los 3 conceptos clave en sus propias palabras, que dibuje el mecanismo sin mirar las diapositivas, que explique a un compañero qué ocurre en la compensación cardíaca. El esfuerzo cognitivo incómodo es precisamente el que genera aprendizaje duradero.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /fc-grid -->
+
+  <div class="quote-simple" style="margin-top:8px">
+    Identificar el error es el primer paso. Diseñar la solución es el aprendizaje real.
+  </div>
+
+</div>
 </main>
 
 <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Volver al inicio">↑</button>
@@ -867,6 +1063,7 @@ function toggleVideo(btn) {
   wrap.classList.toggle('open', !isOpen);
   btn.textContent = isOpen ? 'Ver vídeo' : 'Ocultar vídeo';
 }
+function flipCard(card) { card.classList.toggle('flipped'); }
 const backTop = document.getElementById('backTop');
 window.addEventListener('scroll', () => backTop.classList.toggle('visible', window.scrollY > 300));
 </script>
